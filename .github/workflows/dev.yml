@@ -1,10 +1,10 @@
-name: Build & deploy
+name: DEV - Build & deploy
 on:
  push:
    branches:
-     - master
+     - dev
 jobs:
-  build:
+ build:
    name: Build
    runs-on: ubuntu-latest
    strategy:
@@ -29,7 +29,7 @@ jobs:
    name: Deploy
    needs: build
    runs-on: ubuntu-latest
-   if: github.ref == 'refs/heads/master'
+   if: github.ref == 'refs/heads/dev'
   
    steps:
    - name: Download artifact
@@ -42,4 +42,4 @@ jobs:
      uses: peaceiris/actions-gh-pages@v3
      with:
        github_token: ${{ secrets.GITHUB_TOKEN }}
-       publish_dir: ./build
+       publish_dir: ./build       
